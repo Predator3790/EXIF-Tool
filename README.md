@@ -51,3 +51,7 @@ python exif.py remove -d samples
 ```shell
 python exif.py save -d samples
 ```
+
+## Credits
+
+Image samples provided from [Exif Samples](https://github.com/ianare/exif-samples) by [ianaré sévi](https://github.com/ianare) and his [contributors](https://github.com/ianare/exif-samples/graphs/contributors).
