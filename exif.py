@@ -14,7 +14,7 @@ def DMS_to_DD(degrees: float, minutes: float, seconds: float, negative=False):
 
 def get_EXIF(img_path):
     """Get EXIF data from an image and return it as a dictionary."""
-    img_path = Path(img_path).absolute()
+    img_path = Path(img_path).resolve()
     
     try:
         exif = dict()
@@ -55,7 +55,7 @@ def get_EXIF(img_path):
 
 def remove_EXIF(img_path):
     """Remove EXIF data from an image and return the new image path."""
-    img_path = Path(img_path).absolute()
+    img_path = Path(img_path).resolve()
     img = Image.open(img_path)
     img_data = list(img.getdata())
     img_no_exif = Image.new(img.mode, img.size)
@@ -66,7 +66,7 @@ def remove_EXIF(img_path):
 
 def save_EXIF(img_path):
     """Get and save the EXIF data in an excel file and return its path."""
-    img_path = Path(img_path).absolute()
+    img_path = Path(img_path).resolve()
     exif_data = get_EXIF(img_path)
     csv_path = img_path.with_suffix('.csv')
     with open(csv_path, 'w', encoding='utf-8', errors='replace', newline='') as f:
@@ -90,9 +90,9 @@ if __name__ == '__main__':
     args = parser.parse_args()
     mode = args.mode
     if args.directories is None:
-        files = [file.absolute() for file in args.files]
+        files = [file.resolve() for file in args.files]
     elif args.files is None:
-        files = [file.absolute() for directory in args.directories for file in directory.iterdir() if file.is_file()]
+        files = [file.resolve() for directory in args.directories for file in directory.iterdir() if file.is_file()]
 
     # Make colorama module work in Windows
     just_fix_windows_console()
